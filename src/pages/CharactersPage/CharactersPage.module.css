@@ -1,0 +1,49 @@
+.list{
+margin-top: 51px;
+display: flex;
+flex-wrap: wrap;
+list-style: none;
+padding-left: 0px;
+}
+.item{
+margin-right: 20px;
+margin-bottom: 28px;
+background: #FFFFFF;
+box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+border-radius: 4px;
+
+}
+.img{
+border-radius: 4px 4px 0px 0px;
+width: 240px;
+height: 224px;
+}
+.name{
+padding-top: 14px;
+padding-bottom: 1px;
+margin: 0;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 30px;
+letter-spacing: 0.15px;
+color: rgba(0, 0, 0, 0.87);
+padding-left: 16px;
+}
+.species{
+margin: 0;
+padding-bottom: 12px;
+padding-left: 16px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 21px;
+color: rgba(0, 0, 0, 0.6);
+
+}
+.link{
+text-decoration: none;
+
+}
