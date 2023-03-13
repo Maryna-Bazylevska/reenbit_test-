@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import getCharacters from "../../services/api";
+import { getCharacters, getCharactersByName } from "../../services/api";
 import Image from "../../components/Image/Image";
 import Form from "../../components/Form/Form";
 import css from "./CharactersPage.module.css";
 const CharactersPage = () => {
   const [characters, setCharacters] = useState([]);
+  const [query, setQuery] = useState("");
   useEffect(() => {
     getCharacters()
       .then((data) => {
@@ -13,10 +14,37 @@ const CharactersPage = () => {
       })
       .catch((error) => console.warn(error));
   }, []);
+  useEffect(() => {
+    if (query === null) {
+      return;
+    }
+    getCharactersByName(query).then((data) => {
+      if (data.results.length === 0) {
+        return alert("Not found!");
+      }
+      setCharacters(data.results);
+    });
+  }, [query]);
+  const handleSubmit = (query) => {
+    if (query === "") {
+      return alert("Please, enter a text!");
+    }
+    setQuery(query);
+  };
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("characters", JSON.stringify(characters));
+  // }, [characters]);
+  // useEffect(() => {
+  //   const characters = JSON.parse(window.localStorage.getItem("characters"));
+  //   if (characters) {
+  //     setCharacters(characters);
+  //   }
+  // }, []);
   return (
     <div>
       <Image />
-      <Form />
+      <Form onSubmit={handleSubmit} />
       {characters && (
         <ul className={css.list}>
           {characters.map(({ id, name, species }) => (
