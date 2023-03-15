@@ -10,3 +10,8 @@ export const getCharactersByName = (query) => {
     return response.data;
   });
 };
+export const getCharacterInfo = (id) => {
+  return axios.get(`${BASE_URL}/${id}`).then((response) => {
+    return response.data;
+  });
+};

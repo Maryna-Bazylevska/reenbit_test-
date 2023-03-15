@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getCharacters, getCharactersByName } from "../../services/api";
-import Image from "../../components/Image/Image";
 import Form from "../../components/Form/Form";
 import css from "./CharactersPage.module.css";
+import image from "../../picture/picture.jpg";
 const CharactersPage = () => {
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState(() => {
+    return JSON.parse(localStorage.getItem("characters")) ?? [];
+  });
+
   const [query, setQuery] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.localStorage.setItem("characters", JSON.stringify(characters));
+  }, [characters]);
   useEffect(() => {
     getCharacters()
       .then((data) => {
@@ -14,6 +22,7 @@ const CharactersPage = () => {
       })
       .catch((error) => console.warn(error));
   }, []);
+
   useEffect(() => {
     if (query === null) {
       return;
@@ -30,6 +39,7 @@ const CharactersPage = () => {
       return alert("Please, enter a text!");
     }
     setQuery(query);
+    //navigate({ ...location, search: `query=${query}` });
   };
 
   // useEffect(() => {
@@ -42,14 +52,18 @@ const CharactersPage = () => {
   //   }
   // }, []);
   return (
-    <div>
-      <Image />
+    <div className={css.div}>
+      <img src={image} alt="Rick and Morty" className={css.image} />
       <Form onSubmit={handleSubmit} />
       {characters && (
         <ul className={css.list}>
           {characters.map(({ id, name, species }) => (
             <li key={id} className={css.item}>
-              <Link to={`characters/${id}`} className={css.link}>
+              <Link
+                to={`/${id}`}
+                state={{ from: location }}
+                className={css.link}
+              >
                 <img
                   src={`https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`}
                   alt=""
