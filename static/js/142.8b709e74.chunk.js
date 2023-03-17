@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreenbit_test_=self.webpackChunkreenbit_test_||[]).push([[142],{160:function(t,e,i){i.r(e),i.d(e,{default:function(){return c}});var n=i(689),r="Layout_title__X2T1v",s=i.p+"static/media/rick_and_morty.1989639e3a565a504147.jfif",a=i(184),c=function(){return(0,a.jsxs)("div",{children:[(0,a.jsx)("h1",{className:r,children:"WELCOM TO APP"}),(0,a.jsx)("img",{src:s,alt:"rick_and_morty",width:"100%"}),(0,a.jsx)(n.j3,{})]})}}}]);
+//# sourceMappingURL=142.8b709e74.chunk.js.map

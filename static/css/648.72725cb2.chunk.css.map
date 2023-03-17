@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/648.72725cb2.chunk.css","mappings":"AAAA,uBACI,aAAa,CAChB,WACD,CACA,qBACI,iBACJ","sources":["pages/Signin/Signin.module.css"],"sourcesContent":[".wrapper{\r\n    margin:0 auto;\r\n\twidth:200px;\r\n}\r\n.title{\r\n    text-align: center;\r\n}"],"names":[],"sourceRoot":""}
