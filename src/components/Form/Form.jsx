@@ -1,18 +1,15 @@
 import { ReactComponent as SearchIcon } from "../../picture/search.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./Form.module.css";
 const Form = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(query);
-    setQuery("");
   };
-
   const handleQueryChange = (e) => {
     setQuery(e.currentTarget.value.toLowerCase());
   };
-
   return (
     <div className={css.div}>
       <form onSubmit={handleSubmit}>

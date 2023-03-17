@@ -1,56 +1,37 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getCharacters, getCharactersByName } from "../../services/api";
 import Form from "../../components/Form/Form";
 import css from "./CharactersPage.module.css";
 import image from "../../picture/picture.jpg";
+import { useLocalStorage } from "../../hook/useLocalStorage";
 const CharactersPage = () => {
-  const [characters, setCharacters] = useState(() => {
-    return JSON.parse(localStorage.getItem("characters")) ?? [];
-  });
-
-  const [query, setQuery] = useState("");
+  const [characters, setCharacters] = useState([]);
+  const [value, setValue] = useLocalStorage("query", "");
   const location = useLocation();
-  const navigate = useNavigate();
   useEffect(() => {
-    window.localStorage.setItem("characters", JSON.stringify(characters));
-  }, [characters]);
-  useEffect(() => {
-    getCharacters()
-      .then((data) => {
-        setCharacters(data.results);
-      })
-      .catch((error) => console.warn(error));
+    getCharacters().then((data) => {
+      setCharacters(data.results);
+    });
   }, []);
-
   useEffect(() => {
-    if (query === null) {
+    if (value === null) {
       return;
     }
-    getCharactersByName(query).then((data) => {
+    getCharactersByName(value).then((data) => {
       if (data.results.length === 0) {
         return alert("Not found!");
       }
       setCharacters(data.results);
     });
-  }, [query]);
-  const handleSubmit = (query) => {
-    if (query === "") {
+  }, [value]);
+  const handleSubmit = (value) => {
+    if (value === "") {
       return alert("Please, enter a text!");
     }
-    setQuery(query);
-    //navigate({ ...location, search: `query=${query}` });
+    setValue(value);
   };
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("characters", JSON.stringify(characters));
-  // }, [characters]);
-  // useEffect(() => {
-  //   const characters = JSON.parse(window.localStorage.getItem("characters"));
-  //   if (characters) {
-  //     setCharacters(characters);
-  //   }
-  // }, []);
   return (
     <div className={css.div}>
       <img src={image} alt="Rick and Morty" className={css.image} />
@@ -66,7 +47,7 @@ const CharactersPage = () => {
               >
                 <img
                   src={`https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`}
-                  alt=""
+                  alt="search icon"
                   className={css.img}
                 />
                 <p className={css.name}>{name}</p>

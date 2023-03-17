@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  useParams,
-  NavLink,
-  useNavigate,
-  useLocation,
-  Outlet,
-} from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getCharacterInfo } from "../../services/api";
 import { ReactComponent as ArrowIcon } from "../../picture/arrow_back.svg";
 import css from "./CharacterInfoPage.module.css";
